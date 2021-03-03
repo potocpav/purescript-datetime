@@ -61,6 +61,14 @@ adjust d dt =
       <$> join (exactDate <$> toEnum rec.year <*> toEnum rec.month <*> toEnum rec.day)
       <*> (Time <$> toEnum rec.hour <*> toEnum rec.minute <*> toEnum rec.second <*> toEnum rec.millisecond)
 
+-- | Shift a date/time value with a duration offset. This function is very
+-- | similar to `adjust`, but saturates on out-of-range dates, instead of
+-- | returning `Nothing`.
+shift :: forall d. Duration d => d -> DateTime -> DateTime
+shift d dt = case adjust d dt of
+    Nothing -> if fromDuration d > mempty then top else bottom
+    Just d' -> d'
+
 -- | Calculates the difference between two date/time values, returning the
 -- | result as a duration.
 diff :: forall d. Duration d => DateTime -> DateTime -> d
