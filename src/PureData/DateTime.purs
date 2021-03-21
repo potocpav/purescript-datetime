@@ -1,4 +1,4 @@
-module Data.DateTime
+module PureData.DateTime
   ( DateTime(..)
   , date
   , modifyDate
@@ -8,17 +8,17 @@ module Data.DateTime
   , modifyTimeF
   , adjust
   , diff
-  , module Data.Date
-  , module Data.Time
+  , module PureData.Date
+  , module PureData.Time
   ) where
 
 import Prelude
 
-import Data.Date (Date, Day, Month(..), Weekday(..), Year, canonicalDate, day, exactDate, month, weekday, year)
+import PureData.Date (Date, Day, Month(..), Weekday(..), Year, canonicalDate, day, exactDate, month, weekday, year)
 import Data.Enum (toEnum, fromEnum)
 import Data.Function.Uncurried (Fn2, runFn2)
-import Data.Time (Hour, Millisecond, Minute, Second, Time(..), hour, setHour, millisecond, setMillisecond, minute, setMinute, second, setSecond)
-import Data.Time.Duration (class Duration, fromDuration, toDuration, Milliseconds)
+import PureData.Time (Hour, Millisecond, Minute, Second, Time(..), hour, setHour, millisecond, setMillisecond, minute, setMinute, second, setSecond)
+import PureData.Time.Duration (class Duration, fromDuration, toDuration, Milliseconds)
 import Data.Maybe (Maybe(..))
 
 -- | A date/time value in the Gregorian calendar/UTC time zone.
@@ -65,9 +65,6 @@ adjust d dt =
 -- | similar to `adjust`, but saturates on out-of-range dates, instead of
 -- | returning `Nothing`.
 shift :: forall d. Duration d => d -> DateTime -> DateTime
--- shift d dt = case adjust d dt of
---     Nothing -> if fromDuration d > mempty then top else bottom
---     Just d' -> d'
 shift d dt = case adjust d dt of
     Nothing -> if fromDuration d > mempty then top else bottom
     Just d' -> d'

@@ -35,6 +35,7 @@
   "devDependencies": {
     "purescript-assert": "^5.0.0",
     "purescript-console": "^5.0.0",
-    "purescript-strings": "^5.0.0"
+    "purescript-strings": "^5.0.0",
+    "purescript-quickcheck": "^7.0.0"
   }
 }

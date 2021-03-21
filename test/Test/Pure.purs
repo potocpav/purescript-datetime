@@ -1,38 +1,29 @@
-module Test.Main where
+module Test.Pure where
 
 import Prelude
 
 import Effect (Effect)
 import Effect.Console (log)
 import Data.Array as Array
-import Data.Date as Date
-import Data.DateTime as DateTime
-import Data.DateTime.Instant as Instant
+import PureData.Date as Date
+import PureData.DateTime as DateTime
+import PureData.DateTime.Instant as Instant
 import Data.Either (Either(..), isRight)
 import Data.Enum (class BoundedEnum, Cardinality, toEnum, enumFromTo, cardinality, succ, fromEnum, pred)
-import Data.Interval as Interval
-import Data.Interval.Duration.Iso as IsoDuration
+import PureData.Interval as Interval
+import PureData.Interval.Duration.Iso as IsoDuration
 import Data.Maybe (Maybe(..), fromJust)
 import Data.Newtype (over, unwrap)
-import Data.Time as Time
-import Data.Time.Duration as Duration
+import PureData.Time as Time
+import PureData.Time.Duration as Duration
 import Data.Tuple (Tuple(..), snd)
 import Math (floor)
 import Partial.Unsafe (unsafePartial)
 import Test.Assert (assert)
 import Type.Proxy (Proxy(..))
 
-import Test.Pure as Pure
-import Test.Rewrite as Rewrite
-
-
 main :: Effect Unit
 main = do
-  Pure.main
-  Rewrite.main
-
-disabled :: Effect Unit
-disabled = do
   log "check Duration monoid"
   assert $ Interval.year 1.0 == mempty <> Interval.year 2.0 <> Interval.year 1.0 <> Interval.year (-2.0)
   assert $ Interval.second 0.5 == Interval.millisecond 500.0
